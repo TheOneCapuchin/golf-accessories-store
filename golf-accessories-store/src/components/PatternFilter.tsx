@@ -56,7 +56,7 @@ export default function PatternFilter() {
   const selectAll = () => setSelectedPatterns(patterns.map(p => p.id));
 
   return (
-    <div className="bg-[#0D1A11] rounded-xl shadow-2xl p-6 border border-white/5">
+    <div className="bg-[#0D1A11]">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold gradient-text">Shop by Vibe</h2>
         <div className="flex gap-2">

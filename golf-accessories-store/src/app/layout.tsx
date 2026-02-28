@@ -1,23 +1,19 @@
-import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
-import "./globals.css";
-import GlobalLayout from "@/components/GlobalLayout";
+import type { Metadata } from 'next';
+import { Inter, Poppins } from 'next/font/google';
+import './globals.css';
+import GlobalLayout from '@/components/GlobalLayout';
+import { LanguageProvider } from '@/context/LanguageContext';
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const poppins = Poppins({ 
+  subsets: ['latin'], 
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-poppins'
 });
 
 export const metadata: Metadata = {
-  title: "KapuchinGolf 🐒 Porsgrunn - Premium Forest Golf Accessories",
-  description: "Experience the exclusive KapuchinGolf clubhouse atmosphere in Porsgrunn. Premium golf accessories with Deep Forest vibes and Electric Lime energy. 🐒⛳",
+  title: 'Kapuchin Golf Porsgrunn - Premium Golf Accessories',
+  description: 'Discover our vibrant collection of premium golf accessories with unique Norwegian-inspired patterns and designs.',
 };
 
 export default function RootLayout({
@@ -27,12 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} ${poppins.variable} antialiased`}
-      >
-        <GlobalLayout>
-          {children}
-        </GlobalLayout>
+      <body className={`${inter.variable} ${poppins.variable} antialiased m-0 p-0`}>
+        <LanguageProvider>
+          <GlobalLayout>
+            {children}
+          </GlobalLayout>
+        </LanguageProvider>
       </body>
     </html>
   );

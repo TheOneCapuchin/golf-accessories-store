@@ -4,11 +4,22 @@ export function cn(...inputs: ClassValue[]) {
   return clsx(inputs);
 }
 
-export function formatPrice(price: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(price);
+export function formatPrice(price: number, language: 'en' | 'no' = 'en'): string {
+  if (language === 'no') {
+    // Norwegian Krone formatting
+    return new Intl.NumberFormat('nb-NO', {
+      style: 'currency',
+      currency: 'NOK',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price * 10); // Rough conversion: 1 USD ≈ 10 NOK
+  } else {
+    // USD formatting
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(price);
+  }
 }
 
 export function calculateQuantityPricing(basePrice: number, quantity: number): number {

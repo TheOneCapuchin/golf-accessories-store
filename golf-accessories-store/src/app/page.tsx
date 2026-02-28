@@ -3,10 +3,12 @@
 import { useEffect, useState } from 'react';
 import { useStore } from '@/lib/store';
 import { products, categories } from '@/lib/mock-data';
-import ProductGrid from '@/components/ProductGrid';
 import CategoryFilter from '@/components/CategoryFilter';
-import ClubhouseModal from '@/components/ClubhouseModal';
+import CategoryNavigation from '@/components/CategoryNavigation';
+import ProductGrid from '@/components/ProductGrid';
+import JungleStageCarousel from '@/components/JungleStageCarousel';
 import Link from 'next/link';
+import ClubhouseModal from '@/components/ClubhouseModal';
 
 export default function Home() {
   const { setProducts } = useStore();
@@ -17,7 +19,6 @@ export default function Home() {
   }, [setProducts]);
 
   useEffect(() => {
-    // Show clubhouse modal after 5 seconds for new users
     const hasSeenModal = localStorage.getItem('has_seen_clubhouse_modal');
     if (!hasSeenModal) {
       const timer = setTimeout(() => {
@@ -31,67 +32,51 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section with Mist Effect */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-electric-lime/5 via-transparent to-electric-lime/5">
-        {/* Mist Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-mist via-transparent to-mist pointer-events-none"></div>
-        
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Premium Forest Golf Gear That Stands Out
-          </h2>
-          <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-            Experience the exclusive KapuchinGolf clubhouse atmosphere in Porsgrunn. Premium golf accessories with Deep Forest vibes and Electric Lime energy. 🐒⛳
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/category/performance-polos"
-              className="bg-electric-lime text-deep-forest px-8 py-4 rounded-xl text-lg font-bold hover:bg-electric-lime/90 transition-all transform hover:scale-105 inline-block"
-            >
-              Shop Now
-            </Link>
-            <Link 
-              href="/about"
-              className="border border-electric-lime text-electric-lime px-8 py-4 rounded-xl text-lg font-bold hover:bg-electric-lime hover:text-deep-forest transition-all inline-block"
-            >
-              Our Story
-            </Link>
-          </div>
-        </div>
-        
-        {/* Forest Atmosphere Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-10">
-          <div className="grid grid-cols-3 gap-8">
-            <div className="text-8xl transform rotate-12">🌲</div>
-            <div className="text-8xl transform -rotate-6">�</div>
-            <div className="text-8xl transform rotate-12">⛳</div>
-          </div>
-        </div>
+      {/* Hero Section - Jungle Stage Carousel */}
+      <section className="relative w-full bg-[#1B3022] overflow-hidden mt-0 mb-0">
+        <JungleStageCarousel />
       </section>
 
-      {/* Main Content */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Sidebar Filters */}
-            <div className="lg:w-80 flex-shrink-0">
-              <CategoryFilter />
+      {/* Main Content - Viewport Pinned Layout */}
+      <main className="min-w-full overflow-x-hidden pt-0 gap-y-0 space-y-0">
+        {/* Fixed Left Border - Viewport Pinned */}
+        <div className="absolute left-0 top-16 w-20 h-screen bg-[#0D1A11] z-[50] border-t border-black/20 mt-0"></div>
+        
+        {/* Fixed Right Border - Viewport Pinned */}
+        <div className="absolute right-0 top-16 w-20 h-screen bg-[#0D1A11] z-[50] border-t border-black/20 mt-0"></div>
+        
+        {/* Center Content with Side Border Padding */}
+        <div className="flex w-full mx-20 mt-0">
+          <div className="flex flex-col lg:flex-row w-full gap-y-0">
+            {/* Filter Sidebar - Integrated */}
+            <div className="bg-[#0D1A11] hidden lg:block sticky top-16 w-80 h-[calc(100vh-4rem)] overflow-y-auto z-[50] flex-shrink-0 ml-0 mt-0">
+              <div className="pl-4 pr-6 py-6">
+                <CategoryFilter />
+              </div>
             </div>
             
-            {/* Product Grid */}
-            <div className="flex-1">
-              <div className="mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">Featured Products</h3>
-                <p className="text-white/70">
-                  Discover our collection of premium forest golf accessories
-                </p>
+            {/* Product Grid Content with Border Clearance */}
+            <div className="flex-1 px-4 sm:px-6 lg:px-8 lg:pl-12 lg:pr-12 main-content mt-0">
+              <div className="w-full">
+                {/* Featured Products Section - Primal Jungle */}
+                <section className="w-full bg-[#0D1A11] border-b border-green-900/50 mt-0 mb-0">
+                  <div className="px-4 sm:px-6 lg:px-8">
+                    <h2 className="text-3xl md:text-4xl font-black uppercase tracking-wider text-white">
+                      Featured Products
+                    </h2>
+                  </div>
+                </section>
+                
+                <section className="w-full bg-[#0D1A11]">
+                  <div className="px-4 sm:px-6 lg:px-8 py-8">
+                    <ProductGrid onShowClubhouseModal={() => setIsClubhouseModalOpen(true)} products={products} />
+                  </div>
+                </section>
               </div>
-              
-              <ProductGrid onShowClubhouseModal={() => setIsClubhouseModalOpen(true)} products={products} />
             </div>
           </div>
         </div>
-      </section>
+      </main>
 
       {/* Clubhouse Modal */}
       <ClubhouseModal 

@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { useStore } from '@/lib/store';
+import { formatPrice, calculateQuantityPricing } from '@/lib/utils';
+import { X, Plus, Minus, ShoppingBag, CreditCard, Truck, Trash2 } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 import { products, patterns } from '@/lib/mock-data';
-import { formatPrice } from '@/lib/utils';
-import { X, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
 
 interface CartProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface CartProps {
 export default function Cart({ isOpen, onClose }: CartProps) {
   const { cart, removeFromCart, updateQuantity, clearCart, getCartTotal } = useStore();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const { t, language } = useLanguage();
 
   const getCartItemDetails = (item: typeof cart[0]) => {
     const product = products.find(p => p.id === item.productId);
@@ -118,10 +120,10 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                             
                             <div className="text-right">
                               <p className="font-bold text-deep-navy">
-                                {formatPrice(item.price * item.quantity)}
+                                {formatPrice(item.price * item.quantity, language)}
                               </p>
                               <p className="text-xs text-gray-500">
-                                {formatPrice(item.price)} each
+                                {formatPrice(item.price, language)} each
                               </p>
                             </div>
                           </div>
@@ -147,7 +149,7 @@ export default function Cart({ isOpen, onClose }: CartProps) {
               <div className="flex items-center justify-between">
                 <span className="text-lg font-semibold text-deep-navy">Total</span>
                 <span className="text-2xl font-bold gradient-text">
-                  {formatPrice(getCartTotal())}
+                  {formatPrice(getCartTotal(), language)}
                 </span>
               </div>
               

@@ -5,6 +5,7 @@ import { formatPrice } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useStore } from '@/lib/store';
+import { useLanguage } from '@/context/LanguageContext';
 import { ShoppingCart, Eye, Heart } from 'lucide-react';
 
 interface ProductCardProps {
@@ -24,6 +25,22 @@ const productImages: Record<string, string> = {
 
 export default function ProductCard({ product, selectedPattern, onShowClubhouseModal }: ProductCardProps) {
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist, isAuthenticated } = useStore();
+  const { t, language } = useLanguage();
+  
+  // Fallback for missing product data
+  if (!product) {
+    return (
+      <div className="pattern-card group relative bg-[#243E2C] rounded-2xl overflow-hidden shadow-2xl border border-white/5">
+        <div className="relative aspect-square overflow-hidden flex items-center justify-center">
+          <div className="text-6xl">🏌️</div>
+        </div>
+        <div className="p-4">
+          <p className="text-white text-sm">{t.emptyState}</p>
+        </div>
+      </div>
+    );
+  }
+  
   const displayPattern = selectedPattern || product.patterns[0];
   const productIcon = productImages[product.id] || '🏌️';
   const isSaved = isInWishlist(product.id);
@@ -49,13 +66,16 @@ export default function ProductCard({ product, selectedPattern, onShowClubhouseM
 
   return (
     // Changed to Moss Green background with a subtle white border
-    <div className="pattern-card group relative bg-[#243E2C] rounded-xl overflow-hidden shadow-2xl border border-white/5 hover:border-[#CCFF00]/40 transition-all duration-300">
+    <div className="pattern-card group relative bg-[#243E2C] rounded-2xl overflow-hidden shadow-2xl border border-white/5 hover:border-[#CCFF00]/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
       <div className="relative aspect-square overflow-hidden">
         {/* Darker gradient for the image area */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/40 z-10" />
+        
+        {/* Bottom gradient overlay for text readability */}
+        <div className="absolute bottom-0 left-0 right-0 h-[30%] bg-gradient-to-t from-black/60 to-transparent z-15"></div>
         
         {/* Product mockup background changed to match the theme */}
-        <div className="relative w-full h-full bg-[#1B3022]/50 flex items-center justify-center">
+        <div className="relative w-full h-full bg-[#1B3022]/50 flex items-center justify-center rounded-t-2xl">
           <div className="relative">
             <div className="text-6xl mb-2 filter drop-shadow-xl">{productIcon}</div>
             
@@ -82,14 +102,14 @@ export default function ProductCard({ product, selectedPattern, onShowClubhouseM
               className="flex-1 bg-white/10 backdrop-blur-md text-white py-2 px-3 rounded-lg font-medium text-sm hover:bg-[#CCFF00] hover:text-[#1B3022] transition-all duration-200 flex items-center justify-center gap-2 border border-white/10"
             >
               <Eye size={14} />
-              View
+              {t.view}
             </Link>
             <button
               onClick={handleQuickAdd}
               className="flex-1 bg-[#CCFF00] text-[#1B3022] py-2 px-3 rounded-lg font-medium text-sm hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-[#CCFF00]/20"
             >
               <ShoppingCart size={14} />
-              Add
+              {t.addToCart}
             </button>
           </div>
         </div>
@@ -129,7 +149,7 @@ export default function ProductCard({ product, selectedPattern, onShowClubhouseM
         <div className="flex items-center justify-between mb-3">
           <div>
             <p className="text-xl font-bold text-white">
-              {formatPrice(product.basePrice)}
+              {formatPrice(product.basePrice, language)}
             </p>
             <p className="text-xs text-[#CCFF00]/80">
               {displayPattern.name}
