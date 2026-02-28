@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F8F9FA;
+  --foreground: #2C3E50;
+  --electric-green: #00FF88;
+  --sunset-orange: #FF6B35;
+  --deep-navy: #1A237E;
+  --neon-pink: #FF10F0;
+  --vibrant-yellow: #FFD700;
+  --electric-blue: #00D4FF;
+  --retro-purple: #9C27B0;
+  --floral-red: #E91E63;
+  --bone-white: #F8F9FA;
+  --soft-gray: #E9ECEF;
+  --warm-gray: #6C757D;
+}
+
+body {
+  background: var(--bone-white);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--electric-green), var(--sunset-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.vibrant-border {
+  border: 1px solid transparent;
+  background: linear-gradient(var(--bone-white), var(--bone-white)) padding-box,
+              linear-gradient(135deg, var(--electric-green), var(--sunset-orange)) border-box;
+}
+
+.subtle-accent-border {
+  border: 1px solid var(--soft-gray);
+  transition: all 0.3s ease;
+}
+
+.subtle-accent-border:hover {
+  border-color: var(--electric-green);
+  box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.2);
+}
+
+.glow-effect {
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.15);
+}
+
+.pattern-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--bone-white);
+}
+
+.pattern-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.sophisticated-shadow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.accent-button {
+  background: linear-gradient(135deg, var(--electric-green), var(--sunset-orange));
+  color: var(--deep-navy);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.accent-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(0, 255, 136, 0.25);
+}
+
+.subtle-button {
+  background: var(--bone-white);
+  color: var(--foreground);
+  border: 1px solid var(--soft-gray);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.subtle-button:hover {
+  border-color: var(--electric-green);
+  color: var(--electric-green);
+  background: var(--bone-white);
+}
