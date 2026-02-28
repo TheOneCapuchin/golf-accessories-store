@@ -38,7 +38,7 @@ export default function CategoryPage() {
   }
 
   const categoryProducts = products.filter(product => 
-    product.category === currentCategory.id
+    product.category.id === currentCategory.id
   );
 
   const breadcrumbs = [
