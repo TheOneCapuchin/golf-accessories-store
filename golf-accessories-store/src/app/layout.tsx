@@ -16,8 +16,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "GolfVibe - Anti-Boring Golf Accessories",
-  description: "Express your individuality on the course with our vibrant collection of golf accessories. From neon patterns to retro designs, find the perfect vibe that matches your style.",
+  title: "KapuchinGolf 🐒 Porsgrunn - Premium Forest Golf Accessories",
+  description: "Experience the exclusive KapuchinGolf clubhouse atmosphere in Porsgrunn. Premium golf accessories with Deep Forest vibes and Electric Lime energy. 🐒⛳",
 };
 
 export default function RootLayout({

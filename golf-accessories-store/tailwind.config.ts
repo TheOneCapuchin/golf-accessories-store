@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "electric-green": "#00FF88",
+        "electric-lime": "#CCFF00",
+        "deep-forest": "#1B3022",
         "sunset-orange": "#FF6B35",
         "deep-navy": "#1A237E",
         "neon-pink": "#FF10F0",
@@ -21,6 +22,7 @@ const config: Config = {
         "soft-gray": "#E9ECEF",
         "warm-gray": "#6C757D",
         "foreground": "#2C3E50",
+        "mist": "rgba(255,255,255,0.03)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
@@ -36,8 +38,8 @@ const config: Config = {
           "50%": { transform: "translateY(-10px)" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(0, 255, 136, 0.5)" },
-          "50%": { boxShadow: "0 0 40px rgba(0, 255, 136, 0.8)" },
+          "0%, 100%": { boxShadow: "0 0 20px rgba(204, 255, 0, 0.5)" },
+          "50%": { boxShadow: "0 0 40px rgba(204, 255, 0, 0.8)" },
         },
       },
     },

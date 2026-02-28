@@ -1,3 +1,5 @@
+'use client';
+
 import { Product, Pattern } from '@/lib/types';
 import { formatPrice } from '@/lib/utils';
 import Image from 'next/image';
@@ -46,23 +48,22 @@ export default function ProductCard({ product, selectedPattern, onShowClubhouseM
   };
 
   return (
-    <div className="pattern-card group relative bg-bone-white rounded-xl overflow-hidden sophisticated-shadow border border-soft-gray">
+    // Changed to Moss Green background with a subtle white border
+    <div className="pattern-card group relative bg-[#243E2C] rounded-xl overflow-hidden shadow-2xl border border-white/5 hover:border-[#CCFF00]/40 transition-all duration-300">
       <div className="relative aspect-square overflow-hidden">
-        {/* Pattern overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/5 z-10" />
+        {/* Darker gradient for the image area */}
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20 z-10" />
         
-        {/* Product mockup */}
-        <div className="relative w-full h-full bg-gradient-to-br from-soft-gray to-bone-white flex items-center justify-center">
+        {/* Product mockup background changed to match the theme */}
+        <div className="relative w-full h-full bg-[#1B3022]/50 flex items-center justify-center">
           <div className="relative">
-            {/* Main product icon */}
-            <div className="text-6xl mb-2 filter drop-shadow-sm">{productIcon}</div>
+            <div className="text-6xl mb-2 filter drop-shadow-xl">{productIcon}</div>
             
-            {/* Pattern color indicators */}
             <div className="flex justify-center gap-1">
               {displayPattern.colors.slice(0, 3).map((color, index) => (
                 <div
                   key={index}
-                  className="w-2 h-2 rounded-full border border-white/50 shadow-sm"
+                  className="w-2 h-2 rounded-full border border-white/30 shadow-sm"
                   style={{ backgroundColor: color }}
                 />
               ))}
@@ -71,21 +72,21 @@ export default function ProductCard({ product, selectedPattern, onShowClubhouseM
         </div>
         
         {/* Hover overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 z-20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0D1A11]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 z-20" />
         
-        {/* Quick actions */}
+        {/* Quick actions - Styled for the dark theme */}
         <div className="absolute bottom-4 left-4 right-4 z-30 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
           <div className="flex gap-2">
             <Link
               href={`/products/${product.id}`}
-              className="flex-1 bg-bone-white/95 backdrop-blur-sm text-foreground py-2 px-3 rounded-lg font-medium text-sm hover:bg-electric-green hover:text-deep-navy transition-all duration-200 flex items-center justify-center gap-2 subtle-accent-border"
+              className="flex-1 bg-white/10 backdrop-blur-md text-white py-2 px-3 rounded-lg font-medium text-sm hover:bg-[#CCFF00] hover:text-[#1B3022] transition-all duration-200 flex items-center justify-center gap-2 border border-white/10"
             >
               <Eye size={14} />
               View
             </Link>
             <button
               onClick={handleQuickAdd}
-              className="flex-1 bg-electric-green text-deep-navy py-2 px-3 rounded-lg font-medium text-sm hover:bg-sunset-orange transition-all duration-200 flex items-center justify-center gap-2"
+              className="flex-1 bg-[#CCFF00] text-[#1B3022] py-2 px-3 rounded-lg font-medium text-sm hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-[#CCFF00]/20"
             >
               <ShoppingCart size={14} />
               Add
@@ -93,9 +94,9 @@ export default function ProductCard({ product, selectedPattern, onShowClubhouseM
           </div>
         </div>
 
-        {/* Category badge */}
+        {/* Category badge - Dark background */}
         <div className="absolute top-4 left-4 z-20">
-          <span className="bg-bone-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium text-foreground border border-soft-gray">
+          <span className="bg-[#0D1A11]/80 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium text-[#CCFF00] border border-white/10">
             {product.category.name}
           </span>
         </div>
@@ -103,33 +104,34 @@ export default function ProductCard({ product, selectedPattern, onShowClubhouseM
         {/* Wishlist button */}
         <button
           onClick={handleWishlistToggle}
-          className="absolute top-4 right-4 z-20 p-2 bg-bone-white/90 backdrop-blur-sm rounded-full border border-soft-gray hover:border-sunset-orange transition-all duration-200"
+          className="absolute top-4 right-4 z-20 p-2 bg-[#0D1A11]/60 backdrop-blur-sm rounded-full border border-white/10 hover:border-[#CCFF00] transition-all duration-200"
         >
           <Heart 
             size={16} 
             className={`transition-colors duration-200 ${
-              isSaved ? 'fill-sunset-orange text-sunset-orange' : 'text-warm-gray hover:text-sunset-orange'
+              isSaved ? 'fill-[0#CCFF0] text-[#CCFF00]' : 'text-white/60 hover:text-[#CCFF00]'
             }`}
           />
         </button>
       </div>
       
-      <div className="p-5">
+      {/* Content Area */}
+      <div className="p-5 bg-[#4A3728]">
         <div className="mb-3">
-          <h3 className="text-lg font-semibold text-foreground group-hover:text-electric-green transition-colors line-clamp-1">
+          <h3 className="text-lg font-semibold text-white group-hover:text-[#CCFF00] transition-colors line-clamp-1">
             {product.name}
           </h3>
-          <p className="text-sm text-warm-gray line-clamp-2 mt-1">
+          <p className="text-sm text-gray-400 line-clamp-2 mt-1">
             {product.description}
           </p>
         </div>
         
         <div className="flex items-center justify-between mb-3">
           <div>
-            <p className="text-xl font-bold text-foreground">
+            <p className="text-xl font-bold text-white">
               {formatPrice(product.basePrice)}
             </p>
-            <p className="text-xs text-warm-gray">
+            <p className="text-xs text-[#CCFF00]/80">
               {displayPattern.name}
             </p>
           </div>
@@ -138,16 +140,16 @@ export default function ProductCard({ product, selectedPattern, onShowClubhouseM
             {displayPattern.colors.slice(0, 3).map((color, index) => (
               <div
                 key={index}
-                className="w-3 h-3 rounded-full border border-soft-gray shadow-sm"
+                className="w-3 h-3 rounded-full border border-white/20 shadow-sm"
                 style={{ backgroundColor: color }}
               />
             ))}
           </div>
         </div>
 
-        {/* Bulk discount indicator */}
-        <div className="flex items-center gap-2 text-xs text-electric-green font-medium">
-          <span>💰</span>
+        {/* Brand accent for discounts */}
+        <div className="flex items-center gap-2 text-xs text-[#CCFF00] font-medium border-t border-white/5 pt-3 mt-1">
+          <span>🌲</span>
           <span>Save 20% on 50+ units</span>
         </div>
       </div>

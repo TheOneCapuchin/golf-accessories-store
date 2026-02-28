@@ -17,8 +17,8 @@
 }
 
 body {
-  background: var(--bone-white);
-  color: var(--foreground);
+  background: #1B3022;
+  color: white;
   font-family: var(--font-inter), system-ui, sans-serif;
   margin: 0;
   padding: 0;
